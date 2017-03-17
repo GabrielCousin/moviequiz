@@ -1,5 +1,7 @@
 {
   "name": "moviequiz",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "tapestry": "^1.9.0"
   }
 }
