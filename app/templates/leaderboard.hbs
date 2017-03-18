@@ -1,0 +1,28 @@
+{{ui-topbar}}
+
+<div class="Content">
+  <div class="Grid Grid--centered">
+    <div class="Grid-cell Grid-cell--6">
+      <h2>Leaderboard</h2>
+      <div class="List">
+        <header class="List-header">
+          <h4 class="List-title">Name</h4>
+          <strong>Score</strong>
+        </header>
+        <ul class="List-content">
+          {{#each scores as |item|}}
+            <li class="List-item">
+              <strong class="u-push">{{item.score}}</strong>
+              {{item.user.name}}
+            </li>
+          {{/each}}
+          {{#unless model.length}}
+            <li class="List-item">
+              No points scored yet
+            </li>
+          {{/unless}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
