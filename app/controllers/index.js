@@ -12,6 +12,8 @@ export default Ember.Controller.extend({
       store.createRecord('user', {
         name: username
       });
+
+      this.transitionToRoute('quiz');
     }
 
     return;
