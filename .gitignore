@@ -17,3 +17,5 @@ config/environment.js
 /libpeerconnection.log
 npm-debug.log*
 testem.log
+
+**/.DS_Store
