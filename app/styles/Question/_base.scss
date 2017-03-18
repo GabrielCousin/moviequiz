@@ -4,8 +4,9 @@
 
 .Question-img {
   height: 30vh;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   width: 175px;
   display: inline-block;
   vertical-align: bottom;
