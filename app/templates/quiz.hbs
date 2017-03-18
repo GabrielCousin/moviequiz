@@ -1,0 +1,23 @@
+{{ui-topbar}}
+
+<div class="Content">
+  <div class="Grid Grid--centered">
+    <div class="Grid-cell Grid-cell--6">
+
+      {{#if isFetching}}
+        <div class="u-push u-mgt--m Spinner"></div>
+        <h2>Loading…</h2>
+      {{else}}
+        <div class="Question">
+          <h2>Question 1/10</h2>
+          <div class="Question-img" style="background-image: url('https://image.tmdb.org/t/p/w500/mDDpeDtxuL9Af59rOB8DAjni50A.jpg')"></div>
+          <div class="Question-img" style="background-image: url('https://image.tmdb.org/t/p/w500/bndiUFfJxNd2fYx8XO610L9a07m.jpg')"></div>
+          <h4>Did <em>NAME</em> played in <em>MOVIE</em>?</h4>
+          <button class="Btn Btn--validate" type="button"><i class="Icon Icon--checkmark"></i></button>
+          <button class="Btn Btn--error" type="button"><i class="Icon Icon--cross"></i></button>
+        </div>
+      {{/if}}
+
+    </div>
+  </div>
+</div>

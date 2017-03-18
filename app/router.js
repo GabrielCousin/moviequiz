@@ -8,6 +8,7 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('leaderboard');
+  this.route('quiz');
 });
 
 export default Router;
