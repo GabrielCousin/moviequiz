@@ -20,6 +20,8 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+      MOVIEDB_APIKEY: '7ea5f490261a949e52930517e1b4657c',
+      QUESTION_PER_ROUND: 10
     }
   };
 
