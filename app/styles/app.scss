@@ -37,3 +37,5 @@ $import-tooltip:          false;
 $f-path: unquote("../assets");
 
 @import "../../bower_components/tapestry/src/scss/app.scss";
+
+@import "Wrapper/base";
