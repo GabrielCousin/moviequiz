@@ -9,12 +9,12 @@
         <h2>Loading…</h2>
       {{else}}
         <div class="Question">
-          <h2>Question 1/10</h2>
-          <div class="Question-img" style="background-image: url('https://image.tmdb.org/t/p/w500/mDDpeDtxuL9Af59rOB8DAjni50A.jpg')"></div>
-          <div class="Question-img" style="background-image: url('https://image.tmdb.org/t/p/w500/bndiUFfJxNd2fYx8XO610L9a07m.jpg')"></div>
-          <h4>Did <em>NAME</em> played in <em>MOVIE</em>?</h4>
-          <button class="Btn Btn--validate" type="button"><i class="Icon Icon--checkmark"></i></button>
-          <button class="Btn Btn--error" type="button"><i class="Icon Icon--cross"></i></button>
+          <h2>Question {{currentIndex}}/{{totalQuestions}}</h2>
+          <div class="Question-img" style={{movieImageStyle}}></div>
+          <div class="Question-img" style={{actorImageStyle}}></div>
+          <h4>Did <em>{{currentQuestion.actorName}}</em> played in <em>{{currentQuestion.movieTitle}}</em>?</h4>
+          <button class="Btn Btn--validate" type="button" {{action "checkAnswer" true}}><i class="Icon Icon--checkmark"></i></button>
+          <button class="Btn Btn--error" type="button" {{action "checkAnswer" false}}><i class="Icon Icon--cross"></i></button>
         </div>
       {{/if}}
 
