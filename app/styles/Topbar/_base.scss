@@ -1,0 +1,26 @@
+.Topbar {
+  height: r(12);
+  flex: none;
+}
+
+.Topbar-container {
+  @include pos(f 0 0 null 0);
+  width: 100%;
+  padding: $pd--s $pd--m;
+  color: $shuttle-gray;
+  background-color: $white;
+  z-index: 1000;
+}
+
+.Topbar-icon {
+  margin-right: $mg--s;
+  font-size: $fz--xxl;
+  line-height: r(8);
+}
+
+.Topbar-title {
+  margin: 0;
+  font-size: $fz--xxl;
+  line-height: r(8);
+  font-weight: $fw--semi-bold;
+}
