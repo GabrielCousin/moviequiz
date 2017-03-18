@@ -1,3 +1,18 @@
 {{ui-topbar}}
 
-{{outlet}}
+<div class="Content">
+  <div class="Grid Grid--centered">
+    <div class="Grid-cell Grid-cell--4">
+      <h2>Welcome!</h2>
+      <label class="Label Label--block">
+        Your name
+        <div class="InputGroup">
+          {{input type="text" value=username autocomplete="off" class="Input u-mgt--xs" placeholder="Enter your name"}}
+          <button type="button" class="Btn Btn--validate u-mgt--xs" {{action "onSaveUsername"}}>
+            Start
+          </button>
+        </div>
+      </label>
+    </div>
+  </div>
+</div>
