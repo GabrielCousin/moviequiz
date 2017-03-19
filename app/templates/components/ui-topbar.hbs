@@ -3,4 +3,12 @@
     <i class="Topbar-icon Icon Icon--camera"></i>
     moviequiz
   </h1>
+  <div class="Topbar-actions">
+    {{#if username}}
+      <span class="t-neutral">
+        <i class="Icon Icon--user"></i>
+        {{username}}
+      </span>
+    {{/if}}
+  </div>
 </div>
