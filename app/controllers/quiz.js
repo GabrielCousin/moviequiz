@@ -42,10 +42,9 @@ export default Ember.Controller.extend({
     this.set('currentIndex', this.get('currentIndex') + 1);
   },
 
-  setHighscore() {
+  setHighscore(score) {
     const store = this.get('store');
     const currentUsername = this.get('storage.username');
-    const score = this.get('currentIndex');
 
     store.createRecord('score', {
       name: currentUsername,
@@ -60,7 +59,8 @@ export default Ember.Controller.extend({
       let gameOver = this.get('currentQuestion.match') !== answer;
 
       if (gameOver || index === totalQuestions) {
-        this.setHighscore();
+        let finalScore = gameOver ? index - 1 : index;
+        this.setHighscore(finalScore);
         this.transitionToRoute('leaderboard');
         return;
       }
