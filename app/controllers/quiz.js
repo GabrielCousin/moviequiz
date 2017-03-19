@@ -16,30 +16,11 @@ export default Ember.Controller.extend({
   }),
 
   setNextQuestion () {
-    // @TODO improve algo with more matching questions
-    let movies = this.get('movies');
-    let actors = this.get('actors');
+    const currentIndex = this.get('currentIndex');
+    const questions = this.get('questions');
 
-    let randomMovieIndex = Math.floor(Math.random() * movies.length);
-    let randomActorIndex = Math.floor(Math.random() * actors.length);
-
-    let randomMovie = movies[randomMovieIndex];
-    let randomActor = actors[randomActorIndex];
-
-    let currentQuestion = {
-      movieTitle: randomMovie.get('title'),
-      movieImage: randomMovie.get('image'),
-      actorName: randomActor.get('name'),
-      actorImage: randomActor.get('image'),
-      // @TODO replace parseInt hack
-      match: randomActor.get('movies').indexOf(parseInt(randomMovie.get('id'))) !== -1
-    }
-
-    actors.splice(randomActorIndex, 1)
-
-    this.set('actors', actors);
-    this.set('currentQuestion', currentQuestion);
-    this.set('currentIndex', this.get('currentIndex') + 1);
+    this.set('currentQuestion', questions[currentIndex]);
+    this.set('currentIndex', currentIndex + 1);
   },
 
   setHighscore(score) {

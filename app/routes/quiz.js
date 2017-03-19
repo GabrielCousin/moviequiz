@@ -14,12 +14,8 @@ export default Ember.Route.extend({
   storeMovieDbData(data) {
     const store = this.get('store');
 
-    // data.results.length = 10;
-
     data.results.forEach((result) => {
       let movieIds = [];
-
-      // result.known_for.length = 1;
 
       result.known_for.forEach((movie) => {
         movieIds.push(movie.id);
@@ -37,13 +33,31 @@ export default Ember.Route.extend({
         }
       })
 
-      store.createRecord('actor', {
-        id: result.id,
-        image: result.profile_path,
-        name: result.name,
-        movies: movieIds
-      })
+      let actorExists = store.peekRecord('actor', result.id);
+
+      if (!actorExists) {
+        store.createRecord('actor', {
+          id: result.id,
+          image: result.profile_path,
+          name: result.name,
+          movies: movieIds
+        })
+      }
     });
+  },
+
+  setQuestionTypes () {
+    // this ensure we generate more matching questions
+    let types = [];
+    for (let i = 0; i < 10; i++)
+      types.push(Math.round(Math.random()));
+
+    return types;
+  },
+
+  getMovieById (id) {
+    const store = this.get('store');
+    return store.peekRecord('movie', id)
   },
 
   setupController(controller) {
@@ -60,36 +74,33 @@ export default Ember.Route.extend({
          api_key: MOVIEDB_APIKEY
        }
     }).done((data) => {
-      this.storeMovieDbData(data)
+      this.storeMovieDbData(data);
     }).then(() => {
-      // @TODO improve algo with more matching questions
       const store = this.get('store');
+      let types = this.setQuestionTypes();
       let movies = store.peekAll('movie').toArray();
       let actors = store.peekAll('actor').toArray();
 
-      let randomMovieIndex = Math.floor(Math.random() * movies.length);
-      let randomActorIndex = Math.floor(Math.random() * actors.length);
+      let questions = types.map((forced) => {
+        let actorId = Math.floor(Math.random() * actors.length);
+        let actor = actors[actorId];
 
-      let randomMovie = movies[randomMovieIndex];
-      let randomActor = actors[randomActorIndex];
+        let movieId = forced ? actor.get('movies')[0] : Math.floor(Math.random() * movies.length);
+        let movie = forced ? this.getMovieById(movieId) : movies[movieId];
 
-      let currentQuestion = {
-        movieTitle: randomMovie.get('title'),
-        movieImage: randomMovie.get('image'),
-        actorName: randomActor.get('name'),
-        actorImage: randomActor.get('image'),
-        // @TODO replace parseInt hack
-        match: randomActor.get('movies').indexOf(parseInt(randomMovie.get('id'))) !== -1
-      }
-
-      // debugger;
-      actors.splice(randomActorIndex, 1);
+        return {
+          movieTitle: movie.get('title'),
+          movieImage: movie.get('image'),
+          actorName: actor.get('name'),
+          actorImage: actor.get('image'),
+          match: actor.get('movies').indexOf(parseInt(movie.get('id'))) !== -1
+        }
+      })
 
       controller.set('isFetching', false);
+      controller.set('questions', questions);
+      controller.set('currentQuestion', questions[0]);
       controller.set('currentIndex', 1);
-      controller.set('currentQuestion', currentQuestion);
-      controller.set('movies', movies);
-      controller.set('actors', actors);
     });
   }
 });
