@@ -44,12 +44,15 @@ export default Ember.Controller.extend({
 
   setHighscore(score) {
     const store = this.get('store');
+    const storage = this.get('storage');
     const currentUsername = this.get('storage.username');
 
     store.createRecord('score', {
       name: currentUsername,
       score: score
     })
+
+    storage.addHighscore(currentUsername, score);
   },
 
   actions: {
