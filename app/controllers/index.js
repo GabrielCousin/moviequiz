@@ -6,13 +6,10 @@ export default Ember.Controller.extend({
 
   saveUsername() {
     let username = this.get('username');
-    const store = this.get('store');
+    const storage = this.get('storage');
 
     if (username.length > 2) {
-      store.createRecord('user', {
-        name: username
-      });
-
+      storage.signUserIn(username);
       this.transitionToRoute('quiz');
     }
 
