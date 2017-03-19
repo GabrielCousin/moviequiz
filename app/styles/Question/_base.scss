@@ -2,12 +2,22 @@
   position: relative;
 }
 
+.Question-imgs {
+  font-size: 0;
+}
+
 .Question-img {
-  height: 30vh;
+  width: 50%;
+  height: 200px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  width: 175px;
   display: inline-block;
   vertical-align: bottom;
+
+  @include bp(tablet) {
+    height: 30vh;
+    width: 175px;
+    margin-right: $pd--m;
+  }
 }

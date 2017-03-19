@@ -7,12 +7,24 @@
   @include pos(f 0 0 null 0);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   padding: $pd--s $pd--m;
   color: $shuttle-gray;
   background-color: $white;
   z-index: 1000;
+
+  @include bp(tablet) {
+    justify-content: space-between;
+  }
+}
+
+.Topbar-actions {
+  display: none;
+
+  @include bp(tablet) {
+    display: inline-block;
+  }
 }
 
 .Topbar-icon {

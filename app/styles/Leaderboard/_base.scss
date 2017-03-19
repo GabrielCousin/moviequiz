@@ -1,0 +1,10 @@
+.Leaderboard-header {
+  display: flex;
+  flex-direction: column;
+
+  @include bp(tablet) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

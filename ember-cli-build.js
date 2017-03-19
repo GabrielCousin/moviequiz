@@ -3,7 +3,11 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   const app = new EmberApp(defaults, {
-    sassOptions: {}
+    sassOptions: {},
+
+    'autoprefixer': {
+      browsers: ['last 3 versions'],
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -20,6 +24,10 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import('bower_components/tapestry/dist/fonts/tapestry-icons.woff2', {
+    destDir: 'assets'
+  });
+
+  app.import('bower_components/tapestry/dist/fonts/tapestry-icons.woff', {
     destDir: 'assets'
   });
 

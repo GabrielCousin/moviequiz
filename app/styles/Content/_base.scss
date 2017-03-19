@@ -3,4 +3,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: $pd--m 0;
+  -webkit-overflow-scrolling: touch;
 }

@@ -2,7 +2,7 @@
 
 <div class="Content">
   <div class="Grid Grid--centered">
-    <div class="Grid-cell Grid-cell--6">
+    <div class="Grid-cell Grid-cell--10 Grid-cell--6@tablet">
 
       {{#if isFetching}}
         <div class="u-push u-mgt--m Spinner"></div>
@@ -10,8 +10,10 @@
       {{else}}
         <div class="Question">
           <h2>Question {{currentIndex}}/{{totalQuestions}}</h2>
-          <div class="Question-img" style={{movieImageStyle}}></div>
-          <div class="Question-img" style={{actorImageStyle}}></div>
+          <div class="Question-imgs">
+            <div class="Question-img" style={{movieImageStyle}}></div>
+            <div class="Question-img" style={{actorImageStyle}}></div>
+          </div>
           <h4>Did <em>{{currentQuestion.actorName}}</em> played in <em>{{currentQuestion.movieTitle}}</em>?</h4>
           <button class="Btn Btn--validate" type="button" {{action "checkAnswer" true}}><i class="Icon Icon--checkmark"></i></button>
           <button class="Btn Btn--error" type="button" {{action "checkAnswer" false}}><i class="Icon Icon--cross"></i></button>
