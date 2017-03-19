@@ -1,9 +1,7 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  user: DS.belongsTo('user', {
-    async: false
-  }),
+  name: DS.attr('string'),
   score: DS.attr('number'),
   createdAt: DS.attr('date', {
     defaultValue() {
