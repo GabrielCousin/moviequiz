@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  // @TODO sort http://emberjs.com/api/classes/Ember.computed.html#method_sort
-  scores: Ember.computed.alias('model'),
+  scores: Ember.computed.sort('model', 'scoreSorting'),
+  scoreSorting: ['score:desc'],
 
   resetLeaderboard() {
     const store = this.get('store');
