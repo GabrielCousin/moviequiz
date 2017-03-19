@@ -42,6 +42,17 @@ export default Ember.Controller.extend({
     this.set('currentIndex', this.get('currentIndex') + 1);
   },
 
+  setHighscore() {
+    const store = this.get('store');
+    const currentUsername = this.get('storage.username');
+    const score = this.get('currentIndex');
+
+    store.createRecord('score', {
+      name: currentUsername,
+      score: score
+    })
+  },
+
   actions: {
     checkAnswer(answer) {
       let index = this.get('currentIndex');
@@ -49,6 +60,7 @@ export default Ember.Controller.extend({
       let gameOver = this.get('currentQuestion.match') !== answer;
 
       if (gameOver || index === totalQuestions) {
+        this.setHighscore();
         this.transitionToRoute('leaderboard');
         return;
       }
