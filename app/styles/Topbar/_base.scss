@@ -5,6 +5,9 @@
 
 .Topbar-container {
   @include pos(f 0 0 null 0);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
   padding: $pd--s $pd--m;
   color: $shuttle-gray;
