@@ -30,11 +30,17 @@ $import-spinner:          true;
 $import-switch:           false;
 $import-table:            false;
 $import-responsive-table: false;
-$import-tabs:             false;
+$import-tabs:             true;
 $import-textarea:         false;
 $import-tooltip:          false;
 
 $f-path: unquote("../assets");
+
+@import "../../bower_components/tapestry/src/scss/utils/var/_color-values.scss";
+
+$tab-base-color: $iron;
+$tab-selected-color: $white;
+$tab-hover-color: $white;
 
 @import "../../bower_components/tapestry/src/scss/app.scss";
 

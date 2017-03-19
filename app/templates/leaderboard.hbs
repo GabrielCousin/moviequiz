@@ -3,7 +3,13 @@
 <div class="Content">
   <div class="Grid Grid--centered">
     <div class="Grid-cell Grid-cell--6">
-      <h2>Leaderboard</h2>
+      <div class="u-cf">
+        <div class="Tabs u-pdt--xs u-push">
+          {{#link-to "quiz" class="Tab"}}Play again{{/link-to}}
+          <span class="Tab" tabindex="1" {{action "onResetLeaderboard"}}>Reset</span>
+        </div>
+        <h2 class="u-mgt--0">Leaderboard</h2>
+      </div>
       <div class="List">
         <header class="List-header">
           <h4 class="List-title">Name</h4>
@@ -13,7 +19,7 @@
           {{#each scores as |item|}}
             <li class="List-item">
               <strong class="u-push">{{item.score}}</strong>
-              {{item.user.name}}
+              {{item.name}}
             </li>
           {{/each}}
           {{#unless model.length}}
