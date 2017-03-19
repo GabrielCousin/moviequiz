@@ -18,10 +18,10 @@ export default Ember.Route.extend({
       let movieIds = [];
 
       result.known_for.forEach((movie) => {
-        movieIds.push(movie.id);
         if (movie.media_type !== 'movie')
           return;
 
+        movieIds.push(movie.id);
         let movieExists = store.peekRecord('movie', movie.id);
 
         if (!movieExists) {
@@ -87,6 +87,8 @@ export default Ember.Route.extend({
 
         let movieId = forced ? actor.get('movies')[0] : Math.floor(Math.random() * movies.length);
         let movie = forced ? this.getMovieById(movieId) : movies[movieId];
+        if (!movie)
+          this.setupController();
 
         return {
           movieTitle: movie.get('title'),
