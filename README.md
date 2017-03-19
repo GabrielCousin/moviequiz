@@ -19,6 +19,8 @@ You will need the following things properly installed on your computer.
 * `cd moviequiz`
 * `npm install`
 * `bower install`
+* `cp config/environment.dist.js config/environment.js`
+* Replace `MOVIEDB_APIKEY` with your [API key](https://developers.themoviedb.org/3)
 
 ## Running / Development
 
