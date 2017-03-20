@@ -87,8 +87,6 @@ export default Ember.Route.extend({
 
         let movieId = forced ? actor.get('movies')[0] : Math.floor(Math.random() * movies.length);
         let movie = forced ? this.getMovieById(movieId) : movies[movieId];
-        if (!movie)
-          this.setupController();
 
         return {
           movieTitle: movie.get('title'),
@@ -99,10 +97,12 @@ export default Ember.Route.extend({
         }
       })
 
-      controller.set('isFetching', false);
-      controller.set('questions', questions);
-      controller.set('currentQuestion', questions[0]);
-      controller.set('currentIndex', 1);
+      controller.setProperties({
+        isFetching: false,
+        questions,
+        currentQuestion: questions[0],
+        currentIndex: 1
+      });
     });
   }
 });
