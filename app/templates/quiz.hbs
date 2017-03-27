@@ -6,8 +6,8 @@
       <div class="Question">
         <h2>Question {{currentIndex}}/{{totalQuestions}}</h2>
         <div class="Question-imgs">
-          <div class="Question-img" style={{movieImageStyle}}></div>
-          <div class="Question-img" style={{actorImageStyle}}></div>
+          <div class="Question-img" style={{inline-background currentQuestion.movieImage}}></div>
+          <div class="Question-img" style={{inline-background currentQuestion.actorImage}}></div>
         </div>
         <h4>Did <em>{{currentQuestion.actorName}}</em> played in <em>{{currentQuestion.movieTitle}}</em>?</h4>
         <button class="Btn Btn--validate" type="button" {{action "checkAnswer" true}}><i class="Icon Icon--checkmark"></i></button>
