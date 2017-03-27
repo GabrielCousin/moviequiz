@@ -7,11 +7,12 @@
       <label class="Label Label--block">
         Your name
         <div class="InputGroup">
-          {{input type="text" value=username autocomplete="off" class="Input u-mgt--xs" placeholder="Enter your name"}}
+          {{input type="text" value=username autocomplete="off" class="Input u-mgt--xs" keyUp=(action 'onKeyUp') placeholder="Enter your name"}}
           <button type="button" class="Btn Btn--validate u-mgt--xs" {{action "onSaveUsername"}}>
             Start
           </button>
         </div>
+        <p class={{unless isInvalid "is-hidden"}}>Username should be greater than 2 characters.</p>
       </label>
     </div>
   </div>

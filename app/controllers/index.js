@@ -3,22 +3,38 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
   username: '',
+  isInvalid: false,
 
-  saveUsername() {
+  validateUsername() {
     let username = this.get('username');
-    const storage = this.get('storage');
 
     if (username.length > 2) {
-      storage.signUserIn(username);
-      this.transitionToRoute('quiz');
+      this.saveUsername(username);
+      return;
     }
 
-    return;
+    this.set('isInvalid', true)
+  },
+
+  saveUsername(username) {
+    const storage = this.get('storage');
+    storage.signUserIn(username);
+    this.transitionToRoute('quiz');
   },
 
   actions: {
     onSaveUsername() {
-      this.saveUsername();
+      this.validateUsername();
+    },
+
+    onKeyUp(event) {
+      let keyPressed = event.which;
+
+      if (keyPressed === 13)
+        this.validateUsername()
+
+      this.set('isInvalid', false)
+      return;
     }
   }
 });
