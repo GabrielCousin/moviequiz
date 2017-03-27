@@ -15,34 +15,33 @@ export default Ember.Route.extend({
     const store = this.get('store');
 
     data.results.forEach((result) => {
-      let movieIds = [];
+      let currentActor = store.peekRecord('actor', result.id);
+
+      if (!currentActor) {
+        currentActor = store.createRecord('actor', {
+          id: result.id,
+          profile_path: result.profile_path,
+          name: result.name,
+          // known_for: result.known_for
+        })
+      }
 
       result.known_for.forEach((movie) => {
         if (movie.media_type !== 'movie')
           return;
 
-        movieIds.push(movie.id);
-        let movieExists = store.peekRecord('movie', movie.id);
+        let currentMovie = store.peekRecord('movie', movie.id);
 
-        if (!movieExists) {
-          store.createRecord('movie', {
+        if (!currentMovie) {
+          currentMovie = store.createRecord('movie', {
             id: movie.id,
-            image: movie.poster_path,
-            title: movie.title
+            poster_path: movie.poster_path,
+            media_type: movie.media_type,
+            title: movie.title,
           })
         }
+        currentActor.get('movies').pushObject(currentMovie);
       })
-
-      let actorExists = store.peekRecord('actor', result.id);
-
-      if (!actorExists) {
-        store.createRecord('actor', {
-          id: result.id,
-          image: result.profile_path,
-          name: result.name,
-          movies: movieIds
-        })
-      }
     });
   },
 
@@ -53,11 +52,6 @@ export default Ember.Route.extend({
       types.push(Math.round(Math.random()));
 
     return types;
-  },
-
-  getMovieById (id) {
-    const store = this.get('store');
-    return store.peekRecord('movie', id)
   },
 
   setupController(controller) {
@@ -84,16 +78,14 @@ export default Ember.Route.extend({
       let questions = types.map((forced) => {
         let actorId = Math.floor(Math.random() * actors.length);
         let actor = actors[actorId];
-
-        let movieId = forced ? actor.get('movies')[0] : Math.floor(Math.random() * movies.length);
-        let movie = forced ? this.getMovieById(movieId) : movies[movieId];
+        let movie = forced ? actor.get('movies').toArray()[0] : movies[Math.floor(Math.random() * movies.length)];
 
         return {
           movieTitle: movie.get('title'),
-          movieImage: movie.get('image'),
+          movieImage: movie.get('poster_path'),
           actorName: actor.get('name'),
-          actorImage: actor.get('image'),
-          match: actor.get('movies').indexOf(parseInt(movie.get('id'))) !== -1
+          actorImage: actor.get('profile_path'),
+          match: actor.get('movies').findBy('id', movie.get('id')) !== undefined
         }
       })
 
