@@ -4,16 +4,6 @@ import config from 'moviequiz/config/environment';
 export default Ember.Controller.extend({
   totalQuestions: config.APP.QUESTION_PER_ROUND,
 
-  movieImageStyle: Ember.computed('currentQuestion', function() {
-    let path = this.get('currentQuestion.movieImage');
-    return Ember.String.htmlSafe(`background-image: url("https://image.tmdb.org/t/p/w500${path}")`);
-  }),
-
-  actorImageStyle: Ember.computed('currentQuestion', function() {
-    let path = this.get('currentQuestion.actorImage');
-    return Ember.String.htmlSafe(`background-image: url("https://image.tmdb.org/t/p/w500${path}")`);
-  }),
-
   setNextQuestion () {
     const currentIndex = this.get('currentIndex');
     const questions = this.get('questions');
