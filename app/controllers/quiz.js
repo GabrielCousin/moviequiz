@@ -2,7 +2,6 @@ import Ember from 'ember';
 import config from 'moviequiz/config/environment';
 
 export default Ember.Controller.extend({
-
   totalQuestions: config.APP.QUESTION_PER_ROUND,
 
   movieImageStyle: Ember.computed('currentQuestion', function() {
