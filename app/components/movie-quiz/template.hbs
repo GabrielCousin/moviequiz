@@ -1,1 +1,17 @@
-{{yield}}
+{{ui-topbar}}
+<div class="Content">
+  <div class="Grid Grid--centered">
+    <div class="Grid-cell Grid-cell--10 Grid-cell--6@tablet">
+      <div class="Question">
+        <h2>Question {{currentIndex}}/{{totalQuestions}}</h2>
+        <div class="Question-imgs">
+          <div class="Question-img" style={{inline-background currentQuestion.movieImage}}></div>
+          <div class="Question-img" style={{inline-background currentQuestion.actorImage}}></div>
+        </div>
+        <h4>Did <em>{{currentQuestion.actorName}}</em> played in <em>{{currentQuestion.movieTitle}}</em>?</h4>
+        <button class="Btn Btn--validate" type="button" {{action "checkAnswer" true}}><i class="Icon Icon--checkmark"></i></button>
+        <button class="Btn Btn--error" type="button" {{action "checkAnswer" false}}><i class="Icon Icon--cross"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
