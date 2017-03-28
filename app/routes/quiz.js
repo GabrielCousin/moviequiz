@@ -20,13 +20,19 @@ export default Ember.Route.extend({
     return moviedb.pickGame();
   },
 
-  setupController (controller, model) {
-    controller.setProperties({
-      questions: model,
-      currentQuestion: model[0],
-      currentIndex: 1
-    })
+  actions: {
+    endGame(score) {
+      const store = this.get('store');
+      const storage = this.get('storage');
+      const currentUsername = this.get('storage.username');
+
+      store.createRecord('score', {
+        name: currentUsername,
+        score: score
+      })
+
+      storage.addHighscore(currentUsername, score);
+      this.transitionTo('leaderboard');
+    }
   }
-
-
 });
