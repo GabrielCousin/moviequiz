@@ -2,6 +2,8 @@ import Ember from 'ember';
 import config from 'moviequiz/config/environment';
 
 export default Ember.Component.extend({
+  classNames: ['Quiz'],
+
   init() {
     this._super(...arguments);
     this.setProperties({
