@@ -5,7 +5,8 @@
         <h2>Leaderboard</h2>
         <div class="Tabs u-mgv--m">
           {{#link-to "quiz" class="Tab"}}Play again{{/link-to}}
-          <span class="Tab" tabindex="1" {{action "onResetLeaderboard"}}>Reset</span>
+          <span class="Tab" tabindex="1" {{action "onSaveToServer"}}>{{saveLabel}}</span>
+          <span class="Tab" tabindex="1" {{action (route-action "onResetLeaderboard")}}>Reset</span>
         </div>
       </header>
       <div class="List">
