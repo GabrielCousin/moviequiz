@@ -16,7 +16,7 @@ module('Unit | Initializer | storage', {
 });
 
 // Replace this with your real tests.
-test('it works', function(assert) {
+test('it works', function (assert) {
   initialize(this.application);
 
   // you would normally confirm the results of the initializer here
