@@ -1,25 +1,46 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import wait from 'ember-test-helpers/wait';
 
 moduleForComponent('movie-quiz', 'Integration | Component | movie quiz', {
   integration: true
 });
 
-test('it renders', function(assert) {
+test('should render first question', function (assert) {
+  this.set('model', [{
+    movieTitle: 'Omelette',
+    movieImage: 'http://url.fr/movie.jpg',
+    actorName: 'John Duff',
+    actorImage: 'http://url.fr/actor.jpg',
+    match: true
+  }]);
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  this.render(hbs`{{movie-quiz model=model}}`);
 
-  this.render(hbs`{{movie-quiz}}`);
-
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#movie-quiz}}
-      template block text
-    {{/movie-quiz}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$('[data-name=question_index]').text().trim(), 'Question 1/10');
+  assert.equal(this.$('[data-name=question_text]').text().trim(), 'Did John Duff played in Omelette?');
 });
+
+test('right answer should show next question', function (assert) {
+  this.set('model', [{
+    movieTitle: 'Omelette',
+    movieImage: 'http://url.fr/movie.jpg',
+    actorName: 'John Duff',
+    actorImage: 'http://url.fr/actor.jpg',
+    match: true
+  }, {
+    movieTitle: 'The Breakfast Club',
+    movieImage: 'http://url.fr/movie.jpg',
+    actorName: 'Kevin Bacon',
+    actorImage: 'http://url.fr/actor.jpg',
+    match: false
+  }]);
+
+  this.render(hbs`{{movie-quiz model=model}}`);
+
+  this.$('.Btn--validate').click();
+
+  return wait().then(() => {
+    assert.equal(this.$('[data-name=question_text]').text().trim(), 'Did Kevin Bacon played in The Breakfast Club?');
+  });
+})
