@@ -1,12 +1,17 @@
 import { moduleFor, test } from 'ember-qunit';
+import Ember from 'ember';
 
 moduleFor('controller:index', 'Unit | Controller | index', {
-  // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  beforeEach: function () {
+    this.register('service:storage', Ember.Service.extend({
+      signUserIn() {}
+    }));
+  }
 });
 
-// Replace this with your real tests.
-test('it exists', function(assert) {
+test('username must be greater than 2 chars', function (assert) {
   let controller = this.subject();
-  assert.ok(controller);
+  controller.set('username', 'Us')
+  controller.send('onSaveUsername');
+  assert.equal(controller.get('isInvalid'), true)
 });
