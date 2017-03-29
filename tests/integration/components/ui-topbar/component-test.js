@@ -1,25 +1,19 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import Ember from 'ember';
 
-moduleForComponent('ui-topbar', 'Integration | Component | ui topbar', {
-  integration: true
+const storageStub = Ember.Service.extend({
+  username: 'User'
 });
 
-test('it renders', function(assert) {
+moduleForComponent('ui-topbar', 'Integration | Component | ui topbar', {
+  integration: true,
+  beforeEach: function () {
+    this.register('service:storage', storageStub);
+  }
+});
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
+test('it should display username', function (assert) {
   this.render(hbs`{{ui-topbar}}`);
-
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#ui-topbar}}
-      template block text
-    {{/ui-topbar}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$('[data-name=username]').text().trim(), 'User');
 });
