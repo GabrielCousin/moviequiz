@@ -8,7 +8,13 @@ export default Ember.Service.extend({
 
   refresh() {
     const MOVIEDB_APIKEY = config.APP.MOVIEDB_APIKEY;
-    const MOVIEDB_QUERY_PAGE = Math.ceil((Math.random() * 10));
+    let MOVIEDB_QUERY_PAGE = this.get('lastQueryPage')
+
+    while (MOVIEDB_QUERY_PAGE === this.get('lastQueryPage')) {
+      MOVIEDB_QUERY_PAGE = Math.ceil((Math.random() * 10));
+    }
+
+    this.set('lastQueryPage', MOVIEDB_QUERY_PAGE)
 
     return new Ember.RSVP.Promise((resolve, reject) => {
       Ember.$.ajax({
